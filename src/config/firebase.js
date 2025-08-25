@@ -1,14 +1,14 @@
 import admin from "firebase-admin";
-import serviceAccount from "./grubgroc-test-firebase-adminsdk-fbsvc-a2f4329506.json" assert { type: "json" };
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
 
-// Initialize Firebase Admin only once
+const serviceAccount = require("./grubgroc-test-firebase-adminsdk-fbsvc-a2f4329506.json");
+
 if (!admin.apps.length) {
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
   });
 }
 
-// Export the messaging service
 export const messaging = admin.messaging();
-
 export default admin;
